@@ -1,6 +1,6 @@
 #include "../inc/A2D_App.h"
 
-WPARAM A2D::A2DApp::Run(const Window& target)
+WPARAM ANDRO2D_API A2D::A2DApp::Run(const Window& target)
 {
 	A2D::Internal::GdiStartup();
 	MSG msg;
@@ -14,7 +14,7 @@ WPARAM A2D::A2DApp::Run(const Window& target)
 	return static_cast<int>(msg.wParam);
 }
 
-WPARAM A2D::A2DApp::Run()
+WPARAM ANDRO2D_API A2D::A2DApp::Run()
 {
 	int result = A2D::Internal::GdiStartup();
 	MSG msg;

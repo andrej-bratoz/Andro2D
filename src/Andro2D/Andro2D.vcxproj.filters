@@ -30,6 +30,15 @@
     <ClInclude Include="inc\A2D_Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="inc\A2D_Graphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\controls\A2D_Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\controls\A2D_ControlBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp\A2D_App.cpp">
@@ -42,6 +51,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cpp\A2D_Core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\A2D_Graphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\controls\A2D_ControlBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\controls\A2D_Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

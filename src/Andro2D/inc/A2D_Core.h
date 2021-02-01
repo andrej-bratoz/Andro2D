@@ -5,10 +5,8 @@
 #include <Windows.h>
 #include <string>
 #include <strsafe.h>
-
 #include <gdiplus.h>
 
-#define ANDRO2D_LIB
 
 #ifdef  ANDRO2D_LIB 
 /*Enabled as "export" while compiling the dll project*/
@@ -28,7 +26,6 @@ namespace A2D
 		virtual HWND GetHandle() const = 0;
 	};
 
-
 	typedef wchar_t* A2D_STRING;
 	typedef const wchar_t* A2D_CONST_STRING;
 
@@ -37,6 +34,4 @@ namespace A2D
 		int GdiStartup();
 		void GdiShutdown();
 	}
-
-
 }

@@ -98,8 +98,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;ANDRO2D_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ANDRO2D_LIB=1;WIN32;_DEBUG;ANDRO2D_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -114,8 +115,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;ANDRO2D_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ANDRO2D_LIB=1;WIN32;NDEBUG;ANDRO2D_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -130,8 +132,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;ANDRO2D_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ANDRO2D_LIB=1;_DEBUG;ANDRO2D_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,8 +149,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;ANDRO2D_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ANDRO2D_LIB=1;NDEBUG;ANDRO2D_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -162,14 +166,20 @@
     <ClInclude Include="inc\A2D.h" />
     <ClInclude Include="inc\A2D_App.h" />
     <ClInclude Include="inc\A2D_Exception.h" />
+    <ClInclude Include="inc\A2D_Graphics.h" />
     <ClInclude Include="inc\A2D_Window.h" />
     <ClInclude Include="inc\A2D_Core.h" />
+    <ClInclude Include="inc\controls\A2D_Button.h" />
+    <ClInclude Include="inc\controls\A2D_ControlBase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp\A2D_App.cpp" />
     <ClCompile Include="cpp\A2D_Core.cpp" />
     <ClCompile Include="cpp\A2D_Exception.cpp" />
+    <ClCompile Include="cpp\A2D_Graphics.cpp" />
     <ClCompile Include="cpp\A2D_Window.cpp" />
+    <ClCompile Include="cpp\controls\A2D_Button.cpp" />
+    <ClCompile Include="cpp\controls\A2D_ControlBase.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

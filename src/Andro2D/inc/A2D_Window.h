@@ -3,6 +3,8 @@
 #include <vector>
 
 #include "A2D_Core.h"
+#include "controls/A2D_Button.h"
+
 #include <gdiplus.h>
 
 namespace A2D
@@ -21,14 +23,16 @@ namespace A2D
 		int GetWidth() const;
 		void SetDimension(int width, int height);
 
-		int GetPositionX();
-		int GetPositionY();
+		int GetPositionX() const;
+		int GetPositionY() const;
 		
 		static std::shared_ptr<Window> FindWindow(HWND hWnd);
+		
+		//
 		virtual void OnPaint(HDC hDC, const PAINTSTRUCT& ps);
 		virtual void OnResize();
 		virtual void OnPositionChanged();
-		virtual ~Window() {}
+		virtual ~Window() { }
 	protected:
 		void InitializeInternal();
 		

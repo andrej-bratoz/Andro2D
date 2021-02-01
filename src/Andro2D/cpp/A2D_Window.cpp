@@ -4,7 +4,7 @@
 
 #include "../inc/A2D_Window.h"
 #include "../inc/A2D_Exception.h"
-#include <gdiplus.h>
+#include "../inc/A2D_Graphics.h"
 
 std::vector<std::shared_ptr<A2D::Window>> RegisteredWindows;
 
@@ -58,6 +58,7 @@ void A2D::Window::Show()
         this-> InitializeInternal();
         m_initialized = true;
     }
+
     ShowWindow(this->m_Handle, 0);
     UpdateWindow(this->m_Handle);
     SetWindowPos(this->m_Handle, HWND_TOPMOST, 0, 0, 
@@ -66,12 +67,14 @@ void A2D::Window::Show()
 
 
 A2D::Window::Window(int width, int height, A2D_CONST_STRING title) : m_height(height),
-m_width(width),
-m_title(title),
-m_hInstance(nullptr),
-m_Handle(nullptr)
-{
-}
+																	 m_width(width),
+																	 m_posX(0),
+																	 m_posY(0),
+																	 m_title(title),
+																	 m_hInstance(nullptr),
+																	 m_Handle(nullptr),
+																	 m_initialized(false)
+{}
 
 HWND A2D::Window::GetHandle() const
 {
@@ -139,6 +142,16 @@ void A2D::Window::SetDimension(int width, int height)
     OnResize();
 }
 
+int A2D::Window::GetPositionX() const
+{
+    return this->m_posX;
+}
+
+int A2D::Window::GetPositionY() const
+{
+    return this->m_posY;
+}
+
 std::shared_ptr<A2D::Window> A2D::Window::FindWindowW(HWND hWnd)
 {
     for (const auto& win : RegisteredWindows)
@@ -150,17 +163,8 @@ std::shared_ptr<A2D::Window> A2D::Window::FindWindowW(HWND hWnd)
 
 void A2D::Window::OnPaint(HDC hDC, const PAINTSTRUCT& ps)
 {
-    Gdiplus::Graphics graphics(hDC);
-    const Gdiplus::Color c(30, 180, 30);
-    Gdiplus::SolidBrush b(c);
-    Gdiplus::Font f(L"Arial", 16);
-	Gdiplus::SolidBrush fontColor(Gdiplus::Color(255, 0, 0, 0));
-    const Gdiplus::PointF point(0, 0);
-	
-	
-    graphics.FillRectangle(&b, 0, 0, this->m_width, this->m_height);
-    graphics.DrawString(L"ANDRO2D", 7, &f, point, &b);
-
+    A2D::Graphics graphics(hDC);
+    graphics.FillRectangle(Color::FromKnownColor(KnownColors::Control), 0, 0, this->GetWidth(), this->GetHeight());
 	return;
 }
 
