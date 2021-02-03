@@ -6,6 +6,7 @@
 #include <string>
 #include <strsafe.h>
 #include <gdiplus.h>
+#include <memory>
 
 
 #ifdef  ANDRO2D_LIB 
@@ -33,5 +34,117 @@ namespace A2D
 	{
 		int GdiStartup();
 		void GdiShutdown();
+
+		template <typename  T>
+		class List
+		{
+		public:
+			List()
+			{
+				_size = 128;
+				_data = static_cast<T*>(malloc(_size * sizeof(T)));
+				_count = 0;
+				RtlZeroMemory(_data, _size * sizeof(T));
+			}
+
+			List(const List& l)
+			{
+				_size = l._size;
+				_data = l._data;
+				_count = l._count;
+			}
+
+		/*	List(List&& l) noexcept
+			{
+				_size = std::exchange(l._size);
+				_count = std::exchange(l._count);
+				_data = std::move(_data);
+			}*/
+
+		/*	List& List::operator=(const List& rhs)
+			{
+				if(this != rhs)
+				{
+					free(_data);
+					_size = rhs._size;
+					_count = rhs._count;
+					std::copy_n(rhs._data, _size, _data);
+				}
+				return *this;
+			}*/
+			
+			void Add(T element)
+			{
+				_data[Count()] = element;
+				_count++;
+				if(_count == _size)
+				{
+					_size *= 2;
+					_data = static_cast<T*>(realloc(_data, _size));
+				}
+			}
+
+			int IndexOf(T element)
+			{
+				for(int i = 0; i < Count(); i++)
+				{
+					if (_data[i] == element) return i;
+				}
+				return -1;
+			}
+
+			void Get(int index, T* data)
+			{
+				*data = _data[index];
+			}
+			
+			int Count() const { return _count; }
+
+			int DeleteAt(int location)
+			{
+				if(location < Count() - 1)
+				{
+					for(int i = location; i < Count()-1; i++)
+					{
+						_data[i] = _data[i + 1];
+					}
+				}
+				else if(location >= Count() )
+				{
+					return 0;
+				}
+				_count--;
+				if(_size > _count*4)
+				{
+					_count = _count / 4;
+					_data = static_cast<T*>(realloc(static_cast<void*>(_data), _count));
+				}
+				return 1;
+			}
+
+//			void DebugPrint()
+//			{
+//#if 0
+//				OutputDebugStringW(L"[");
+//				for(int i = 0; i < Count(); i++)
+//				{
+//					std::wstring num = std::to_wstring((int)(_data[i]));
+//					OutputDebugStringW(num.c_str());
+//					OutputDebugStringW(L", ");
+//				}
+//				OutputDebugStringW(L"]");
+//				OutputDebugStringW(L"\n");
+//#endif
+//			}
+			~List() { free(_data); }
+
+		private:
+			int _count;
+			int _size;
+			T* _data;
+		};
+
 	}
+
+	
 }

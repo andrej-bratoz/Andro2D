@@ -171,6 +171,7 @@
     <ClInclude Include="inc\A2D_Core.h" />
     <ClInclude Include="inc\controls\A2D_Button.h" />
     <ClInclude Include="inc\controls\A2D_ControlBase.h" />
+    <ClInclude Include="inc\controls\A2D_Panel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp\A2D_App.cpp" />

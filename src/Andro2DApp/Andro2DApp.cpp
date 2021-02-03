@@ -10,7 +10,34 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
-
+  /*  A2D::Internal::List<int> list;
+    for(int i = 1; i < 128; i++)
+    {
+        list.Add(i);
+    }
+    int result;
+    auto index = list.IndexOf(45);
+    list.Get(45, &result);
+	
+    list.DeleteAt(45);
+    list.DebugPrint();
+    list.Get(45, &result);
+    list.DeleteAt(45);
+    list.DebugPrint();
+    list.Get(45, &result);
+    list.Get(45, &result);
+    list.DeleteAt(45);
+    list.DebugPrint();
+    list.Get(45, &result);
+    list.Get(45, &result);
+    list.DeleteAt(45);
+    list.DebugPrint();
+    list.Get(45, &result);
+    list.Get(45, &result);
+    list.DeleteAt(45);
+    list.DebugPrint();
+    list.Get(45, &result);*/
+	
     A2D::Window window(1024, 768, L"A2DWindow");
     window.Show();
     A2D::A2DApp::Run(window);
