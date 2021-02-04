@@ -13,6 +13,7 @@ namespace A2D
 		public:
 			Button(HWND parent);
 			Button(const Button&);
+			void SetText(A2D_CONST_STRING text) const;
 			void Create() override;
 			virtual ~Button();
 		protected:

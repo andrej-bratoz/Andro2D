@@ -14,6 +14,7 @@ namespace A2D
 	{
 	public:
 		Window(int width, int height, A2D_CONST_STRING title);
+		Window(const Window& w);
 
 		HWND GetHandle() const override;
 		void Show();
@@ -26,13 +27,16 @@ namespace A2D
 		int GetPositionX() const;
 		int GetPositionY() const;
 		
-		static std::shared_ptr<Window> FindWindow(HWND hWnd);
+		[[nodiscard]] const ControlList* Controls() const { return _controls; }
+		void AddControl(Control* c);
+		
+		static Window* FindWindow(HWND hWnd);
 		
 		//
 		virtual void OnPaint(HDC hDC, const PAINTSTRUCT& ps);
 		virtual void OnResize();
 		virtual void OnPositionChanged();
-		virtual ~Window() { }
+		virtual ~Window() { delete _controls; }
 	protected:
 		void InitializeInternal();
 		
@@ -46,8 +50,9 @@ namespace A2D
 		HINSTANCE m_hInstance;
 		HWND m_Handle;
 		bool m_initialized;
+		ControlList *_controls;
 	};
 
-	static std::vector<std::shared_ptr<Window>> RegisteredWindows;
+	static std::vector<Window*> RegisteredWindows;
 
 }

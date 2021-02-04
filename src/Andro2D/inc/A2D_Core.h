@@ -54,25 +54,6 @@ namespace A2D
 				_count = l._count;
 			}
 
-		/*	List(List&& l) noexcept
-			{
-				_size = std::exchange(l._size);
-				_count = std::exchange(l._count);
-				_data = std::move(_data);
-			}*/
-
-		/*	List& List::operator=(const List& rhs)
-			{
-				if(this != rhs)
-				{
-					free(_data);
-					_size = rhs._size;
-					_count = rhs._count;
-					std::copy_n(rhs._data, _size, _data);
-				}
-				return *this;
-			}*/
-			
 			void Add(T element)
 			{
 				_data[Count()] = element;
@@ -122,21 +103,12 @@ namespace A2D
 				return 1;
 			}
 
-//			void DebugPrint()
-//			{
-//#if 0
-//				OutputDebugStringW(L"[");
-//				for(int i = 0; i < Count(); i++)
-//				{
-//					std::wstring num = std::to_wstring((int)(_data[i]));
-//					OutputDebugStringW(num.c_str());
-//					OutputDebugStringW(L", ");
-//				}
-//				OutputDebugStringW(L"]");
-//				OutputDebugStringW(L"\n");
-//#endif
-//			}
-			~List() { free(_data); }
+			~List()
+			{
+				if (_data == nullptr) return;
+				free(_data);
+				_data = nullptr;
+			}
 
 		private:
 			int _count;

@@ -65,5 +65,8 @@
     <ClCompile Include="cpp\controls\A2D_Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cpp\controls\A2D_Panel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

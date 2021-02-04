@@ -14,7 +14,7 @@ class ANDRO2D_API Control
 {
 public:
 	explicit Control(HWND parent);
-	Control(const Control& c) = delete;
+	Control(const Control& c);
 	[[nodiscard]] int GetX() const;
 	[[nodiscard]] int GetY() const;
 	[[nodiscard]] int GetWidth() const;
@@ -30,10 +30,10 @@ public:
 	virtual void Destroy();
 	operator HWND() const;
 
-	[[nodiscard]] const ControlList& Controls() const { return _controls; }
+	[[nodiscard]] const ControlList* Controls() const { return _controls; }
 	
 	//
-	virtual ~Control() = default;
+	virtual ~Control() { delete _controls; }
 protected:
 	HWND m_parentHWnd;
 	HWND m_hWnd;
@@ -44,7 +44,7 @@ private:
 	//
 	int m_width;
 	int m_height;
-	ControlList _controls;
+	ControlList* _controls;
 
 	//	
 

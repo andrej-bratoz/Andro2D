@@ -181,6 +181,7 @@
     <ClCompile Include="cpp\A2D_Window.cpp" />
     <ClCompile Include="cpp\controls\A2D_Button.cpp" />
     <ClCompile Include="cpp\controls\A2D_ControlBase.cpp" />
+    <ClCompile Include="cpp\controls\A2D_Panel.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

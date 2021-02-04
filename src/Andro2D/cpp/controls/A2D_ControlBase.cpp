@@ -1,13 +1,25 @@
 #include "../../inc/controls/A2D_ControlBase.h"
 
-Control::Control(HWND parent) : m_posX(0),
+Control::Control(HWND parent) : m_parentHWnd(nullptr),
+								m_hWnd(nullptr),
+								m_posX(0),
 								m_posY(0),
 								m_width(10),
-								m_height(10),
-								m_parentHWnd(nullptr),
-								m_hWnd(nullptr)
+								m_height(10)
 {
+	this->_controls = new ControlList();
 	this->m_parentHWnd = parent;
+}
+
+Control::Control(const Control& c)
+{
+	this->m_parentHWnd = c.m_parentHWnd;
+	this->m_hWnd = c.m_hWnd;
+	this->m_posX = c.m_posX;
+	this->m_posY = c.m_posY;
+	this->m_width = c.m_width;
+	this->m_height = c.m_height;
+	this->_controls = c._controls;
 }
 
 int Control::GetX() const

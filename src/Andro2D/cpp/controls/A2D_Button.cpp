@@ -10,6 +10,11 @@ A2D::Controls::Button::Button(const Button& btn) : Control(btn.m_parentHWnd)
 	this->m_hWnd = btn.m_hWnd;
 }
 
+void A2D::Controls::Button::SetText(A2D_CONST_STRING text) const
+{
+	SendMessageW(this->m_hWnd, WM_SETTEXT, 0, (LPARAM)text);
+}
+
 void A2D::Controls::Button::Create()
 {
 	this->m_hWnd = CreateWindow(L"BUTTON",

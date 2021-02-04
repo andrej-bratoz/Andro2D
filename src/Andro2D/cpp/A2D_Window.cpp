@@ -15,7 +15,7 @@ static LRESULT CALLBACK A2D_WindowProc(
     _In_ LPARAM lParam
 )
 {
-    std::shared_ptr<A2D::Window>window = A2D::Window::FindWindow(hwnd);
+    auto window = A2D::Window::FindWindow(hwnd);
     if (window == nullptr) return DefWindowProcW(hwnd, uMsg, wParam, lParam);
     return window->WndProc(hwnd, uMsg, wParam, lParam);
 }
@@ -48,7 +48,7 @@ void A2D::Window::InitializeInternal()
     this->m_Handle = CreateWindowW(wcex.lpszClassName, LPWSTR(this->m_title), WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, m_hInstance, nullptr);
     if (!GetHandle()) throw WindowException("CreateWindow Failed");
-    RegisteredWindows.push_back(std::make_shared<Window>(*this));
+    RegisteredWindows.push_back(this);
 }
 
 void A2D::Window::Show()
@@ -74,7 +74,22 @@ A2D::Window::Window(int width, int height, A2D_CONST_STRING title) : m_height(he
 																	 m_hInstance(nullptr),
 																	 m_Handle(nullptr),
 																	 m_initialized(false)
-{}
+{
+    this->_controls = new ControlList;
+}
+
+A2D::Window::Window(const Window& w)
+{
+	this->m_width = w.m_width;
+	this->m_height = w.m_height;
+    this->m_posX = w.m_posX;
+    this->m_posY = w.m_posY;
+    this->m_title = w.m_title;
+    this->m_hInstance = w.m_hInstance;
+    this->m_Handle = w.m_Handle;
+    this->m_initialized = w.m_initialized;
+    this->_controls = w._controls;
+}
 
 HWND A2D::Window::GetHandle() const
 {
@@ -95,7 +110,7 @@ LRESULT A2D::Window::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
             RegisteredWindows.erase(
             std::remove_if(RegisteredWindows.begin(), 
                 RegisteredWindows.end(), 
-                [this](const std::shared_ptr<Window> w) -> bool
+                [this](Window* w) -> bool
                 {
                     return this->GetHandle() == w->GetHandle();
                 }),
@@ -152,7 +167,13 @@ int A2D::Window::GetPositionY() const
     return this->m_posY;
 }
 
-std::shared_ptr<A2D::Window> A2D::Window::FindWindowW(HWND hWnd)
+void A2D::Window::AddControl(Control* c)
+{
+	this->_controls->Add(c);
+    c->Create();
+}
+
+A2D::Window* A2D::Window::FindWindowW(HWND hWnd)
 {
     for (const auto& win : RegisteredWindows)
     {
